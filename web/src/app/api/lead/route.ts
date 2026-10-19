@@ -20,25 +20,33 @@ const MAX_KEYS = 10_000;
 const TRUST_PROXY = process.env.TRUST_PROXY === "1";
 const hits = new Map<string, number[]>();
 
-function overLimit(key: string, { max, windowMs }: { max: number; windowMs: number }): boolean {
+type Limit = { max: number; windowMs: number };
+
+/** Checks every bucket first and records the request in all of them only if none is full,
+ *  so a rejected request never uses up anyone's allowance. */
+function overLimits(checks: [string, Limit][]): boolean {
   const now = Date.now();
   if (hits.size > MAX_KEYS) {
     for (const [k, times] of hits) if (now - times[times.length - 1] > 60 * 60_000) hits.delete(k);
   }
-  const recent = (hits.get(key) ?? []).filter((t) => now - t < windowMs);
-  if (recent.length >= max) {
-    hits.set(key, recent);
-    return true;
-  }
-  hits.set(key, [...recent, now]);
+  const recent = checks.map(([key, { windowMs }]) => (hits.get(key) ?? []).filter((t) => now - t < windowMs));
+  if (checks.some(([, { max }], i) => recent[i].length >= max)) return true;
+  checks.forEach(([key], i) => hits.set(key, [...recent[i], now]));
   return false;
 }
 
+/** The address as it is delivered to: lowercase, no trailing dot on the domain, googlemail.com -> gmail.com. */
+function canonicalEmail(email: string): string {
+  const [local, domain = ""] = email.trim().toLowerCase().split("@");
+  const host = domain.replace(/\.+$/, "");
+  return `${local}@${host === "googlemail.com" ? "gmail.com" : host}`;
+}
+
 /** One key per real inbox: "a.b+x@gmail.com" and "ab@gmail.com" are the same mailbox. */
-function inboxKey(email: string): string {
-  const [local, domain = ""] = email.toLowerCase().split("@");
+function inboxKey(canonical: string): string {
+  const [local, domain] = canonical.split("@");
   const base = local.split("+")[0];
-  return `${domain === "gmail.com" || domain === "googlemail.com" ? base.replaceAll(".", "") : base}@${domain}`;
+  return `${domain === "gmail.com" ? base.replaceAll(".", "") : base}@${domain}`;
 }
 
 /** Read at most MAX_BODY_BYTES; null if the body is larger (checked before and while reading). */
@@ -80,7 +88,7 @@ export async function POST(req: Request): Promise<NextResponse<LeadResult>> {
 
   const lead: LeadInput = {
     name: text(b.name),
-    email: text(b.email),
+    email: canonicalEmail(text(b.email)),
     phone: text(b.phone),
     city: text(b.city),
     service: SERVICES.includes(text(b.service) as (typeof SERVICES)[number]) ? text(b.service) : "Other",
@@ -95,8 +103,9 @@ export async function POST(req: Request): Promise<NextResponse<LeadResult>> {
 
   // Behind a trusted proxy, the last X-Forwarded-For hop is the one the proxy added; otherwise there is no IP to trust.
   const ip = TRUST_PROXY ? req.headers.get("x-forwarded-for")?.split(",").at(-1)?.trim() : undefined;
-  if (overLimit("all", LIMITS.all) || (ip && overLimit(`ip:${ip}`, LIMITS.ip)) ||
-      overLimit(`email:${inboxKey(lead.email)}`, LIMITS.email)) {
+  const checks: [string, Limit][] = [[`email:${inboxKey(lead.email)}`, LIMITS.email], ["all", LIMITS.all]];
+  if (ip) checks.unshift([`ip:${ip}`, LIMITS.ip]);
+  if (overLimits(checks)) {
     return fail("We already have several requests from you. We'll reply to those; please wait before sending more.", 429);
   }
 
