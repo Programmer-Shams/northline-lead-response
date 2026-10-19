@@ -8,13 +8,23 @@ const WEBHOOK_SECRET = process.env.N8N_WEBHOOK_SECRET;
 const TIMEOUT_MS = 10_000;
 const MAX_BODY_BYTES = 10_000;
 
-// Each accepted request costs an AI call and sends an email, so cap them per sender IP and per address.
-// In-memory: enough for one server process; a multi-instance deployment needs a shared store (and a captcha).
-const LIMITS = { ip: { max: 5, windowMs: 10 * 60_000 }, email: { max: 3, windowMs: 60 * 60_000 } };
+// Each accepted request costs an AI call and sends an email, so cap them: overall, per sender IP (only when
+// a trusted proxy sets it, since clients can forge X-Forwarded-For) and per inbox (plus-tags and Gmail dots
+// removed). In-memory: enough for one server process; a public deployment needs a shared store and a captcha.
+const LIMITS = {
+  all: { max: 30, windowMs: 10 * 60_000 },
+  ip: { max: 5, windowMs: 10 * 60_000 },
+  email: { max: 5, windowMs: 60 * 60_000 },
+};
+const MAX_KEYS = 10_000;
+const TRUST_PROXY = process.env.TRUST_PROXY === "1";
 const hits = new Map<string, number[]>();
 
 function overLimit(key: string, { max, windowMs }: { max: number; windowMs: number }): boolean {
   const now = Date.now();
+  if (hits.size > MAX_KEYS) {
+    for (const [k, times] of hits) if (now - times[times.length - 1] > 60 * 60_000) hits.delete(k);
+  }
   const recent = (hits.get(key) ?? []).filter((t) => now - t < windowMs);
   if (recent.length >= max) {
     hits.set(key, recent);
@@ -24,14 +34,41 @@ function overLimit(key: string, { max, windowMs }: { max: number; windowMs: numb
   return false;
 }
 
+/** One key per real inbox: "a.b+x@gmail.com" and "ab@gmail.com" are the same mailbox. */
+function inboxKey(email: string): string {
+  const [local, domain = ""] = email.toLowerCase().split("@");
+  const base = local.split("+")[0];
+  return `${domain === "gmail.com" || domain === "googlemail.com" ? base.replaceAll(".", "") : base}@${domain}`;
+}
+
+/** Read at most MAX_BODY_BYTES; null if the body is larger (checked before and while reading). */
+async function readCapped(req: Request): Promise<string | null> {
+  if (Number(req.headers.get("content-length") ?? 0) > MAX_BODY_BYTES) return null;
+  if (!req.body) return "";
+  const reader = req.body.getReader();
+  const chunks: Uint8Array[] = [];
+  let size = 0;
+  for (;;) {
+    const { done, value } = await reader.read();
+    if (done) break;
+    size += value.byteLength;
+    if (size > MAX_BODY_BYTES) {
+      await reader.cancel();
+      return null;
+    }
+    chunks.push(value);
+  }
+  return new TextDecoder().decode(Buffer.concat(chunks));
+}
+
 const text = (v: unknown) => (typeof v === "string" ? v.trim() : "");
 const fail = (error: string, status: number) => NextResponse.json<LeadResult>({ ok: false, error }, { status });
 
 export async function POST(req: Request): Promise<NextResponse<LeadResult>> {
   if (!WEBHOOK_URL || !WEBHOOK_SECRET) return fail("The form is not connected yet. Run n8n/deploy.py.", 500);
 
-  const raw = await req.text();
-  if (raw.length > MAX_BODY_BYTES) return fail("That request is too large. Shorten the message and send it again.", 413);
+  const raw = await readCapped(req);
+  if (raw === null) return fail("That request is too large. Shorten the message and send it again.", 413);
   let body: unknown;
   try {
     body = JSON.parse(raw);
@@ -56,8 +93,10 @@ export async function POST(req: Request): Promise<NextResponse<LeadResult>> {
   const problem = checkLead(lead);
   if (problem) return fail(problem, 400);
 
-  const ip = req.headers.get("x-forwarded-for")?.split(",")[0].trim() || "local";
-  if (overLimit(`ip:${ip}`, LIMITS.ip) || overLimit(`email:${lead.email.toLowerCase()}`, LIMITS.email)) {
+  // Behind a trusted proxy, the last X-Forwarded-For hop is the one the proxy added; otherwise there is no IP to trust.
+  const ip = TRUST_PROXY ? req.headers.get("x-forwarded-for")?.split(",").at(-1)?.trim() : undefined;
+  if (overLimit("all", LIMITS.all) || (ip && overLimit(`ip:${ip}`, LIMITS.ip)) ||
+      overLimit(`email:${inboxKey(lead.email)}`, LIMITS.email)) {
     return fail("We already have several requests from you. We'll reply to those; please wait before sending more.", 429);
   }
 

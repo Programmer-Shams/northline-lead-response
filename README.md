@@ -96,7 +96,8 @@ Results and every run, including the earlier one and its bug, are in [`eval/resu
 - **AI failure.** If the AI step fails after its retries, the lead gets no reply and no CRM record; Slack gets "lead failed" and the Sheet row says why.
 - **Facebook.** The workflow accepts the lead object as the Graph API returns it (`field_data` with `full_name`, `email`, `phone_number`, `city`, `what_service_do_you_need`, `tell_us_about_your_project`). A real Lead Ads webhook only sends a lead id, so production needs one Graph API call to fetch the lead first.
 - **Slack check.** The test runner checks the Slack log the workflow keeps (Slack answered HTTP 200), not the Slack channel itself.
-- **Form.** The server route rate-limits per IP and per email in memory and has a honeypot field. A public deployment should add a captcha and a shared rate-limit store.
+- **Form.** The server route caps requests overall (30 per 10 minutes), per inbox (5 per hour; plus-tags and Gmail dots are ignored) and, behind a trusted proxy (`TRUST_PROXY=1`), per IP. Limits live in memory and reset when the server restarts. There is a honeypot field and a 10 KB body cap. A public deployment should add a captcha and a shared rate-limit store.
+- **Unverified email addresses.** Anyone who knows a person's email can submit a lead in their name. If they do it first, that person's real enquiry within 24 hours counts as a repeat: it becomes a HubSpot note, with no second reply and no Slack alert (the spec's rule for repeats). Production would verify the address or alert on hot repeats.
 - **Secrets in n8n.** The webhook key appears in n8n's stored executions (request headers) and the Slack webhook URL is a node parameter. Keep the n8n editor private.
 
 ## Deviations from the spec
