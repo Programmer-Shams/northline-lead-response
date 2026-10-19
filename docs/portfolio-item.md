@@ -1,13 +1,26 @@
 # Upwork portfolio item
 
-Text for the Upwork portfolio entry. Every number comes from `eval/results.csv` (final run, 19 October 2026, every reply read by hand).
+Ready to paste into Upwork's "Add a new portfolio project" form. Every number comes from `eval/results.csv` (final run, 19 October 2026, every reply read by hand). No outside links, as the spec requires.
 
-**Title:** AI Lead Response System: Every Lead Answered and in Your CRM in Under 60 Seconds
+**Project title** (70 of 70 characters)
 
-**Description:**
+AI Lead Response: Every Lead Answered and in Your CRM Under 60 Seconds
 
-New leads from a website form or Facebook ad get a personalized reply in a median of 11.6 seconds, are scored hot, warm or cold by AI, and land in HubSpot with a note explaining the score. Hot leads alert the sales team in Slack; spam and repeat enquiries are filtered; failures retry and raise an alert. Tested on 20 leads: 20/20 scored correctly, 16/16 replies under 60 seconds, 0 duplicate contacts. Built with n8n, GPT-5.5, HubSpot, Gmail, Slack and Google Sheets.
+**Your role** (optional)
 
-**Skills / tags:** n8n, AI automation, lead qualification, HubSpot, OpenAI API, Gmail API, Slack, Google Sheets, Next.js
+Automation engineer: designed, built and tested the full system
 
-**Media:** the 60–120 second video (form submit → reply in the inbox with a visible clock → HubSpot contact with the AI note → Slack hot alert → the Lead log sheet → the failure alert → the results table), plus `docs/architecture.png`.
+**Project description** (514 of 600 characters)
+
+New website and Facebook leads get a personal email reply in a median of 11.6 seconds, are scored hot, warm or cold by AI, and land in HubSpot with a note explaining the score. Hot leads alert the sales team in Slack; spam and repeat enquiries are filtered; every lead is logged in Google Sheets; failures retry and raise an alert. Tested on 20 leads: 20/20 scored correctly, 16/16 replies under 60 seconds, 0 duplicate contacts, 0 invented prices. Built with n8n, GPT-5.5, HubSpot, Gmail, Slack and Google Sheets.
+
+**Skills and deliverables** (5; pick Upwork's closest suggestion for each)
+
+n8n, HubSpot, OpenAI API, Workflow Automation, Lead Generation
+
+**Related Upwork job** (optional): leave empty.
+
+**Content**, in this order:
+
+1. Video: `northline-lead-response-demo.mp4` (1:30, recorded in Chrome, no audio).
+2. Image: `docs/architecture.png`.
