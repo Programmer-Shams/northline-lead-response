@@ -1,0 +1,53 @@
+lead_id,source,expected_tier,actual_tier,tier_ok,crm_tier,expected_reply,replied,reply_count,reply_ok,sent_at_utc,inbox_at_utc,seconds_to_inbox,under_60s,sheet_seconds_to_reply,landed_in,expected_crm,crm_contacts,crm_notes,crm_deals,crm_deal_stage,crm_ok,expected_slack,slack_kinds,slack_ok,sheet_status,sheet_ok,sheet_reason,http_status,sent_after_ref_s,auto_reply_flags,reply_subject,reply_text,manual_tier_ok,manual_reply_ok,manual_notes
+L01,website,hot,hot,True,hot,yes (mention 24/7 tarping),True,1,True,2026-10-18T18:10:03.204+00:00,2026-10-18T18:10:07.540+00:00,4.34,True,1.33,INBOX,create contact,1,2,1,New lead,True,hot alert,hot,True,ok,True,urgent problem in area,200,,,Thanks for contacting Northline,"Thanks Dana Whitfield. A team member will call within 1 business hour. We offer 24/7 emergency tarping for active leaks. Book: https://stub.invalid/book
+
+The Northline team",,,
+L02,facebook,hot,hot,True,hot,yes,True,1,True,2026-10-18T18:10:05.227+00:00,2026-10-18T18:10:09.808+00:00,4.58,True,1.11,INBOX,create contact,1,1,1,New lead,True,hot alert,hot,True,ok,True,urgent problem in area,200,,,Thanks for contacting Northline,"Thanks Marcus Bell. A team member will call within 1 business hour. Book: https://stub.invalid/book
+
+The Northline team",,,
+L03,website,warm,warm,True,warm,yes (gutter price range),True,1,True,2026-10-18T18:10:07.240+00:00,2026-10-18T18:10:11.448+00:00,4.21,True,1.46,INBOX,create contact,1,1,0,,True,none,,True,ok,True,planned work in area,200,,,Thanks for contacting Northline,"Thanks Priya Shah. Typical price: $1,200 to $3,000. Book: https://stub.invalid/book
+
+The Northline team",,,
+L04,facebook,warm,warm,True,warm,yes,True,1,True,2026-10-18T18:10:09.248+00:00,2026-10-18T18:10:13.754+00:00,4.51,True,0.84,INBOX,create contact,1,1,0,,True,none,,True,ok,True,planned work in area,200,,,Thanks for contacting Northline,"Thanks Tom Avery. Book: https://stub.invalid/book
+
+The Northline team",,,
+L05,website,cold,cold,True,cold,yes (out of area; no booking link),True,1,True,2026-10-18T18:10:11.257+00:00,2026-10-18T18:10:16.240+00:00,4.98,True,1.04,INBOX,create contact,1,1,0,,True,none,,True,ok,True,out of service area,200,,,Thanks for contacting Northline,"Thanks Linda Kowalski. Sorry, you are outside our service area.
+
+The Northline team",,,
+L06,website,cold,cold,True,cold,yes (short),True,1,True,2026-10-18T18:10:13.267+00:00,2026-10-18T18:10:15.335+00:00,2.07,True,1.04,INBOX,create contact,1,1,0,,True,none,,True,ok,True,not a customer or timeline over 3 months,200,,,Thanks for contacting Northline,"Thanks Greg Monroe, we appreciate you reaching out.
+
+The Northline team",,,
+L07,website,spam,spam,True,,no,False,0,True,2026-10-18T18:10:15.273+00:00,,,,,,none (log to sheet only),0,0,0,,True,none,,True,ok,True,sales pitch or no real request,200,,,,,,,
+L08,facebook,hot,hot,True,hot,yes (mention 24/7 tarping),True,1,True,2026-10-18T18:10:17.284+00:00,2026-10-18T18:10:19.981+00:00,2.7,True,0.63,INBOX,create contact,1,1,1,New lead,True,hot alert,hot,True,ok,True,urgent problem in area,200,,,Thanks for contacting Northline,"Thanks Ellen Brooks. A team member will call within 1 business hour. We offer 24/7 emergency tarping for active leaks. Book: https://stub.invalid/book
+
+The Northline team",,,
+L09,website,hot,hot,True,hot,no (repeat within 24h),False,0,True,2026-10-18T18:12:33.217+00:00,,,,,,update existing contact (add note),1,2,1,New lead,True,none (note appended),,True,repeat,True,urgent problem in area,200,150.0,,,,,,
+L10,website,warm,warm,True,warm,yes (gutter guard price range),True,1,True,2026-10-18T18:12:35.224+00:00,2026-10-18T18:12:38.648+00:00,3.42,True,0.83,INBOX,create contact,1,1,0,,True,none,,True,ok,True,planned work in area,200,,,Thanks for contacting Northline,"Thanks Kevin Ortiz. Typical price: $8 to $14 per linear foot. Book: https://stub.invalid/book
+
+The Northline team",,,
+L11,website,hot,hot,True,hot,yes (in Spanish),True,1,True,2026-10-18T18:12:37.231+00:00,2026-10-18T18:12:40.278+00:00,3.05,True,0.74,INBOX,create contact,1,1,1,New lead,True,hot alert,hot,True,ok,True,urgent problem in area,200,,does not look Spanish,Thanks for contacting Northline,"Thanks Lucía Fernández. A team member will call within 1 business hour. We offer 24/7 emergency tarping for active leaks. Book: https://stub.invalid/book
+
+The Northline team",,,
+L12,website,warm,warm,True,warm,yes (no discount offered),True,1,True,2026-10-18T18:12:39.236+00:00,2026-10-18T18:12:42.548+00:00,3.31,True,0.71,INBOX,create contact,1,1,0,,True,none,,True,ok,True,planned work in area,200,,,Thanks for contacting Northline,"Thanks Jared Pike. Book: https://stub.invalid/book
+
+The Northline team",,,
+L13,facebook,cold,cold,True,cold,yes (out of area; no booking link),True,1,True,2026-10-18T18:12:41.243+00:00,2026-10-18T18:12:45.746+00:00,4.5,True,1.15,INBOX,create contact,1,1,0,,True,none,,True,ok,True,out of service area,200,,,Thanks for contacting Northline,"Thanks Hannah Ruiz. Sorry, you are outside our service area.
+
+The Northline team",,,
+L14,website,hot,hot,True,hot,yes,True,1,True,2026-10-18T18:12:43.249+00:00,2026-10-18T18:12:48.065+00:00,4.82,True,1.40,INBOX,create contact,1,1,1,New lead,True,hot alert,hot,True,ok,True,urgent problem in area,200,,,Thanks for contacting Northline,"Thanks Omar Haddad. A team member will call within 1 business hour. We offer 24/7 emergency tarping for active leaks. Book: https://stub.invalid/book
+
+The Northline team",,,
+L15,website,warm,warm,True,warm,no (invalid email; flag),False,0,True,2026-10-18T18:12:45.258+00:00,,,,,,create contact without email,1,1,0,,True,invalid-contact alert,invalid_contact,True,ok,True,planned work in area,200,,,,,,,
+L16,website,warm,warm,True,warm,yes (skylight price),True,1,True,2026-10-18T18:12:47.264+00:00,2026-10-18T18:12:51.877+00:00,4.61,True,0.99,INBOX,create contact,1,1,0,,True,none,,True,ok,True,planned work in area,200,,,Thanks for contacting Northline,"Thanks Chris Novak. Typical price: $1,400. Book: https://stub.invalid/book
+
+The Northline team",,,
+L17,website,cold,cold,True,cold,yes (short),True,1,True,2026-10-18T18:12:49.270+00:00,2026-10-18T18:12:52.567+00:00,3.3,True,0.98,INBOX,create contact,1,1,0,,True,none,,True,ok,True,not a customer or timeline over 3 months,200,,,Thanks for contacting Northline,"Thanks Ava Simmons, we appreciate you reaching out.
+
+The Northline team",,,
+L18,facebook,hot,hot,True,hot,yes,True,1,True,2026-10-18T18:12:51.278+00:00,2026-10-18T18:12:53.647+00:00,2.37,True,1.00,INBOX,create contact,1,1,1,New lead,True,hot alert,hot,True,ok,True,urgent problem in area,200,,,Thanks for contacting Northline,"Thanks Ray Dunn. A team member will call within 1 business hour. Book: https://stub.invalid/book
+
+The Northline team",,,
+L19,website,spam,spam,True,,no,False,0,True,2026-10-18T18:12:53.284+00:00,,,,,,none (log to sheet only),0,0,0,,True,none,,True,ok,True,sales pitch or no real request,200,,,,,,,
+L20,website,warm,warm,True,warm,yes,True,1,True,2026-10-18T18:12:55.292+00:00,2026-10-18T18:12:59.900+00:00,4.61,True,1.13,INBOX,create contact,1,1,0,,True,none,,True,ok,True,planned work in area,200,,,Thanks for contacting Northline,"Thanks Nina Patel. Book: https://stub.invalid/book
+
+The Northline team",,,

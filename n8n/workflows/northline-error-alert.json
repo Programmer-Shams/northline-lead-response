@@ -1,0 +1,56 @@
+{
+  "name": "Northline lead workflow error alert",
+  "nodes": [
+    {
+      "id": "798119ff-78b4-54cf-aa56-cfdc5e2fc658",
+      "name": "On workflow error",
+      "type": "n8n-nodes-base.errorTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        0
+      ],
+      "parameters": {}
+    },
+    {
+      "id": "348894a6-57b7-578f-9a59-e3300271bf23",
+      "name": "Alert: workflow crashed",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        220,
+        0
+      ],
+      "parameters": {
+        "method": "POST",
+        "url": "__ENV_SLACK_WEBHOOK_URL__",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ text: ':rotating_light: *Lead workflow crashed* - a lead may not have been answered.\\n*Execution:* ' + ($json.execution.id || 'unknown') + '\\n*Node:* ' + ($json.execution.lastNodeExecuted || 'unknown') + '\\n*Error:* ' + String(($json.execution.error || {}).message || 'unknown').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').slice(0, 300) + '\\nCheck the Lead log for a row stuck in processing.' }) }}",
+        "options": {
+          "timeout": 30000
+        }
+      },
+      "retryOnFail": true,
+      "maxTries": 4,
+      "waitBetweenTries": 2000,
+      "onError": "continueRegularOutput"
+    }
+  ],
+  "connections": {
+    "On workflow error": {
+      "main": [
+        [
+          {
+            "node": "Alert: workflow crashed",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  }
+}

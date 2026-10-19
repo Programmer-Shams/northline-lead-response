@@ -1,0 +1,6 @@
+lead_id,source,expected_tier,actual_tier,tier_ok,crm_tier,expected_reply,replied,reply_count,reply_ok,sent_at_utc,inbox_at_utc,seconds_to_inbox,under_60s,sheet_seconds_to_reply,landed_in,expected_crm,crm_contacts,crm_notes,crm_deals,crm_deal_stage,crm_ok,expected_slack,slack_kinds,slack_ok,sheet_status,sheet_ok,sheet_reason,http_status,sent_after_ref_s,auto_reply_flags,reply_subject,reply_text,manual_tier_ok,manual_reply_ok,manual_notes
+L02,facebook,hot,hot,True,,yes,True,1,True,2026-10-19T05:37:20.928+00:00,2026-10-19T05:37:37.000+00:00,17.07,True,16.57,INBOX,create contact,0,0,0,,True,hot alert,hot lead_failed,True,failed,True,Westerville is in the service area and roof replacement is needed within two weeks.,200,,,Roof replacement request,"Hi Marcus,
+
+Thank you for reaching out. We can help with your insurance-approved roof replacement request for the next two weeks. Our office is closed now, so a team member will call first thing next business morning. You can also book a free inspection here: {BOOKING_LINK}
+
+The Northline team",,,

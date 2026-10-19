@@ -1,0 +1,3 @@
+search-path = ["scripts", "eval", "n8n"]
+python-interpreter-path = ".venv/bin/python"
+project-excludes = ["web/**", ".venv/**"]

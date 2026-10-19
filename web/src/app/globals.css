@@ -1,0 +1,103 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+/* Light-only page: dark: utilities apply only under an explicit .dark class, never from the OS setting. */
+@custom-variant dark (&:is(.dark *));
+
+/* Northline — palette taken from a weathered copper-and-shingle roofline:
+   galvalume panels, charcoal shingle text, verdigris copper as the one accent,
+   and hi-vis tarp-crew yellow kept for the emergency line only. */
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-barlow);
+  --font-heading: var(--font-barlow-condensed);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --color-galvalume: var(--galvalume);
+  --color-seam: var(--seam);
+  --color-verdigris: var(--verdigris);
+  --color-patina: var(--patina);
+  --color-hivis: var(--hivis);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+}
+
+:root {
+  --galvalume: #f2f4f1;
+  --seam: #cdd3cf;
+  --verdigris: #2e7563;
+  --patina: #1c4a3f;
+  --hivis: #f2c12e;
+
+  --background: var(--galvalume);
+  --foreground: #262b2a;
+  --card: #ffffff;
+  --card-foreground: #262b2a;
+  --popover: #ffffff;
+  --popover-foreground: #262b2a;
+  --primary: var(--verdigris);
+  --primary-foreground: #ffffff;
+  --secondary: #e4e9e5;
+  --secondary-foreground: #262b2a;
+  --muted: #e4e9e5;
+  --muted-foreground: #5f6b67;
+  --accent: #e1ede8;
+  --accent-foreground: var(--patina);
+  --destructive: #b42318;
+  --border: var(--seam);
+  --input: #b9c2bd;
+  --ring: var(--verdigris);
+  --radius: 0.5rem;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  html {
+    color-scheme: light;
+    -webkit-text-size-adjust: 100%;
+  }
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-feature-settings: "tnum" 0;
+  }
+}
+
+/* The form panel's top edge is a shallow roof pitch. */
+.gable {
+  clip-path: polygon(0 1.75rem, 50% 0, 100% 1.75rem, 100% 100%, 0 100%);
+  padding-top: 3.25rem;
+}
+
+.tabular {
+  font-variant-numeric: tabular-nums;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

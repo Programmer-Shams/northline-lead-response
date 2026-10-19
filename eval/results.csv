@@ -1,0 +1,113 @@
+lead_id,source,expected_tier,actual_tier,tier_ok,crm_tier,expected_reply,replied,reply_count,reply_ok,sent_at_utc,inbox_at_utc,seconds_to_inbox,under_60s,sheet_seconds_to_reply,landed_in,expected_crm,crm_contacts,crm_notes,crm_deals,crm_deal_stage,crm_ok,expected_slack,slack_kinds,slack_ok,sheet_status,sheet_ok,sheet_reason,http_status,sent_after_ref_s,auto_reply_flags,reply_subject,reply_text,manual_tier_ok,manual_reply_ok,manual_notes
+L01,website,hot,hot,True,hot,yes (mention 24/7 tarping),True,1,True,2026-10-19T05:28:14.246+00:00,2026-10-19T05:28:27.000+00:00,13.75,True,13.23,INBOX,create contact,1,2,1,New lead,True,hot alert,hot,True,ok,True,Dublin is in the service area and the lead has an active storm-related leak needing ASAP help.,200,,,We received your roof leak request,"Hi Dana,
+
+Thank you for reaching out. We understand water is dripping through your bedroom ceiling after last night’s storm and you need help ASAP.
+
+Our office is closed now, so a team member will call first thing next business morning. For active leaks, we also offer 24/7 emergency tarping within our service area.
+
+You can also book a free inspection here: {BOOKING_LINK}
+
+The Northline team",yes,yes,
+L02,facebook,hot,hot,True,hot,yes,True,1,True,2026-10-19T05:28:34.368+00:00,2026-10-19T05:28:45.000+00:00,11.63,True,10.87,INBOX,create contact,1,1,1,New lead,True,hot alert,hot,True,ok,True,Westerville is in the service area and the roof replacement is needed within two weeks.,200,,,Roof replacement request,"Hi Marcus,
+
+Thanks for reaching out. We understand your insurance claim was approved and you’d like your roof replaced in the next two weeks.
+
+Our office is closed now, so a team member will call you first thing next business morning. You can also book a free inspection here: {BOOKING_LINK}
+
+The Northline team",yes,yes,
+L03,website,warm,warm,True,warm,yes (gutter price range),True,1,True,2026-10-19T05:28:54.437+00:00,2026-10-19T05:29:05.000+00:00,11.56,True,10.87,INBOX,create contact,1,1,0,,True,none,,True,ok,True,Grove City is in the service area and gutter replacement is planned for next month.,200,,,Gutter replacement estimate,"Hi Priya,
+
+Thanks for reaching out. For gutter replacement on an average home, our published estimate range is $1,200 to $3,000, with final pricing after a free inspection.
+
+You can book a free inspection here: {BOOKING_LINK}
+
+The Northline team",yes,yes,
+L04,facebook,warm,warm,True,warm,yes,True,1,True,2026-10-19T05:29:14.509+00:00,2026-10-19T05:29:25.000+00:00,11.49,True,10.72,INBOX,create contact,1,1,0,,True,none,,True,ok,True,Gahanna is in the service area and the lead is requesting an estimate for a specific service with a planned fall timeline.,200,,,Siding estimate request,"Hi Tom,
+
+Thanks for reaching out. We can help with siding repair and replacement, and we’d be happy to set up a free inspection for your new siding estimate. You can book a time here:
+
+{BOOKING_LINK}
+
+The Northline team",yes,yes,
+L05,website,cold,cold,True,cold,yes (out of area; no booking link),True,1,True,2026-10-19T05:29:34.617+00:00,2026-10-19T05:29:44.000+00:00,10.38,True,10.15,INBOX,create contact,1,1,0,,True,none,,True,ok,True,"Cleveland is outside the service area, even though the request is urgent wind-related roof repair.",200,,,Regarding your roof repair request,"Hi Linda,
+
+Thank you for reaching out. We’re sorry to hear about the missing shingles after the wind. Cleveland is outside our Columbus metro service area, so we’re not able to come out for this repair.
+
+The Northline team",yes,yes,
+L06,website,cold,cold,True,cold,yes (short),True,1,True,2026-10-19T05:29:54.692+00:00,2026-10-19T05:30:07.000+00:00,13.31,True,12.29,INBOX,create contact,1,1,0,,True,none,,True,ok,True,"Columbus is in the service area, but the roof replacement timeline is over 3 months.",200,,,Planning a future roof replacement,"Hi Greg,
+
+Thanks for reaching out. Since you’re thinking about a new roof in a year or two and there’s no rush, it sounds like this is early planning. When you’re closer to the project, we’d be happy to help with a free inspection and discuss roof replacement options.
+
+The Northline team",yes,yes,
+L07,website,spam,spam,True,,no,False,0,True,2026-10-19T05:30:14.790+00:00,,,,,,none (log to sheet only),0,0,0,,True,none,,True,ok,True,Sales/SEO marketing pitch with no real roofing service request.,200,,,,,yes,yes,
+L08,facebook,hot,hot,True,hot,yes (mention 24/7 tarping),True,1,True,2026-10-19T05:30:34.904+00:00,2026-10-19T05:30:46.000+00:00,12.1,True,11.72,INBOX,create contact,1,1,1,New lead,True,hot alert,hot,True,ok,True,Worthington is in the service area and the lead has an active emergency roof leak.,200,,,We can help with your roof emergency,"Hi Ellen,
+
+Thank you for reaching out. We’re sorry a tree branch came through your roof and rain is coming in.
+
+Because this is an active leak in our service area, 24/7 emergency tarping may be available. Our office is closed now, so a team member will call first thing next business morning. You can also book a free inspection here: {BOOKING_LINK}
+
+The Northline team",yes,yes,
+L09,website,hot,hot,True,hot,no (repeat within 24h),False,0,True,2026-10-19T05:30:44.250+00:00,,,,,,update existing contact (add note),1,2,1,New lead,True,none (note appended),,True,repeat,True,Dublin is in the service area and the lead has an active worsening leak.,200,150.0,,,,yes,yes,
+L10,website,warm,warm,True,warm,yes (gutter guard price range),True,1,True,2026-10-19T05:31:04.355+00:00,2026-10-19T05:31:13.000+00:00,9.64,True,9.48,INBOX,create contact,1,1,0,,True,none,,True,ok,True,Upper Arlington is in the service area and the lead is asking for a price on gutter guards.,200,,,Gutter guard pricing,"Hi Kevin,
+
+Thanks for reaching out. Gutter guards are typically $8 to $14 per linear foot, with final pricing confirmed after a free inspection.
+
+You can book a free inspection here: {BOOKING_LINK}
+
+The Northline team",yes,yes,
+L11,website,hot,hot,True,hot,yes (in Spanish),True,1,True,2026-10-19T05:31:24.418+00:00,2026-10-19T05:31:37.000+00:00,13.58,True,13.11,INBOX,create contact,1,1,1,New lead,True,hot alert,hot,True,ok,True,In service area with an active roof leak and help needed this week.,200,,,Ayuda con la gotera en su techo,"Hola Lucía,
+
+Gracias por contactarnos. Entendemos que tiene una gotera en el techo desde ayer y necesita ayuda esta semana.
+
+Nuestra oficina está cerrada ahora, pero un miembro del equipo la llamará a primera hora de la próxima mañana hábil. Para goteras activas dentro de nuestra área de servicio, también ofrecemos tarping de emergencia 24/7.
+
+También puede reservar una inspección gratuita aquí: {BOOKING_LINK}
+
+The Northline team",yes,yes,
+L12,website,warm,hot,False,hot,yes (no discount offered),True,1,True,2026-10-19T05:31:44.480+00:00,2026-10-19T05:32:00.000+00:00,16.52,True,16.35,INBOX,create contact,1,1,1,New lead,False,none,hot,False,ok,True,Hilliard is in the service area and the inspection is requested within 2 weeks.,200,,,Roof inspection request,"Hi Jared,
+
+Thank you for reaching out. We can help with a roof inspection in Hilliard sometime this month.
+
+Our office is closed now, so a team member will call first thing next business morning. You can also book a free inspection here: {BOOKING_LINK}
+
+The Northline team",yes,yes,
+L13,facebook,cold,cold,True,cold,yes (out of area; no booking link),True,1,True,2026-10-19T05:32:04.549+00:00,2026-10-19T05:32:15.000+00:00,11.45,True,11.03,INBOX,create contact,1,1,0,,True,none,,True,ok,True,"Cincinnati is outside the service area, even though the request is urgent for a leak repair.",200,,,Roof repair request,"Hi Hannah,
+
+Thank you for reaching out. We’re sorry to hear about the leak, but Cincinnati is outside our Columbus metro service area, so we’re not able to help with this repair.
+
+The Northline team",yes,yes,
+L14,website,hot,hot,True,hot,yes,True,1,True,2026-10-19T05:32:24.620+00:00,2026-10-19T05:32:37.000+00:00,13.38,True,12.37,INBOX,create contact,1,1,1,New lead,True,hot alert,hot,True,ok,True,In service area with an active leak and work needed this week.,200,,,We can help with your flat roof leak,"Hi Omar,
+
+Thank you for reaching out. We understand your warehouse flat roof is leaking onto inventory and you need help this week.
+
+Our office is closed now, so a team member will call first thing next business morning. For active leaks within our service area, 24/7 emergency tarping is available.
+
+You can also book a free inspection here: {BOOKING_LINK}
+
+The Northline team",yes,yes,
+L15,website,warm,warm,True,warm,no (invalid email; flag),False,0,True,2026-10-19T05:32:44.685+00:00,,,,,,create contact without email,1,1,0,,True,invalid-contact alert,invalid_contact,True,ok,True,Columbus is in the service area and the gutter cleaning is planned for next month.,200,,,,,yes,yes,
+L16,website,warm,warm,True,warm,yes (skylight price),True,1,True,2026-10-19T05:33:04.746+00:00,2026-10-19T05:33:14.000+00:00,10.25,True,9.95,INBOX,create contact,1,1,0,,True,none,,True,ok,True,Dublin is in the service area and the skylight installation is planned within 2 weeks to 3 months.,200,,,Skylight installation request,"Hi Chris,
+
+Thanks for reaching out. Skylight installation starts from $1,400, with final pricing after a free inspection. You can book a free inspection here: {BOOKING_LINK}
+
+The Northline team",yes,yes,
+L17,website,cold,cold,True,cold,yes (short),True,1,True,2026-10-19T05:33:24.816+00:00,2026-10-19T05:33:35.000+00:00,11.18,True,10.13,INBOX,create contact,1,1,0,,True,none,,True,ok,True,"In the service area, but this is a student research request rather than a potential customer.",200,,,Thanks for reaching out,"Hi Ava,
+
+Thanks for reaching out. We appreciate your interest in learning about roofing for your school project. This request is not for roofing work, but we’ve noted your message.
+
+The Northline team",yes,yes,
+L18,facebook,hot,hot,True,hot,yes,True,1,True,2026-10-19T05:33:44.877+00:00,2026-10-19T05:33:56.000+00:00,12.12,True,11.50,INBOX,create contact,1,1,1,New lead,True,hot alert,hot,True,ok,True,Gahanna is in the service area and the lead reports hail damage with an inspection needed before Friday.,200,,,Hail damage inspection,"Hi Ray,
+
+Thank you for reaching out. We can help inspect the hail damage on your roof before your insurance adjuster comes Friday.
+
+Our office is closed now, so a team member will call first thing next business morning. You can also book a free inspection here: {BOOKING_LINK}
+
+The Northline team",yes,yes,
+L19,website,spam,spam,True,,no,False,0,True,2026-10-19T05:34:04.957+00:00,,,,,,none (log to sheet only),0,0,0,,True,none,,True,ok,True,Gibberish with no real service request or intent.,200,,,,,yes,yes,
+L20,website,warm,warm,True,warm,yes,True,1,True,2026-10-19T05:34:25.023+00:00,2026-10-19T05:34:35.000+00:00,10.98,True,10.32,INBOX,create contact,1,1,0,,True,none,,True,ok,True,Grove City is in the service area and the roof inspection is planned within about two months.,200,,,Roof inspection request,"Hi Nina,
+
+Thanks for reaching out. We can help with a roof inspection before you sell your house. Roof inspections are free, and you can book a free inspection here:
+
+{BOOKING_LINK}
+
+The Northline team",yes,yes,

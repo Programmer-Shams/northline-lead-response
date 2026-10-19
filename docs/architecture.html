@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Northline lead response: architecture</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600&family=Barlow+Condensed:wght@600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --galvalume: #f2f4f1; --seam: #cdd3cf; --ink: #262b2a; --muted: #5f6b67;
+    --verdigris: #2e7563; --patina: #1c4a3f; --verdigris-soft: #e1ede8; --hivis: #f2c12e; --hivis-soft: #fdf3cf;
+  }
+  html, body { margin: 0; background: var(--galvalume); }
+  svg { display: block; }
+  .title { font-family: "Barlow Condensed", system-ui, sans-serif; font-weight: 700; font-size: 40px; fill: var(--ink); }
+  .sub   { font-family: Barlow, system-ui, sans-serif; font-size: 18px; fill: var(--muted); }
+  .h     { font-family: "Barlow Condensed", system-ui, sans-serif; font-weight: 700; font-size: 24px; fill: var(--ink); }
+  .hw    { font-family: "Barlow Condensed", system-ui, sans-serif; font-weight: 700; font-size: 24px; fill: #ffffff; }
+  .b     { font-family: Barlow, system-ui, sans-serif; font-size: 16px; fill: var(--muted); }
+  .bi    { font-family: Barlow, system-ui, sans-serif; font-size: 16px; fill: var(--ink); }
+  .bw    { font-family: Barlow, system-ui, sans-serif; font-size: 16px; fill: #d9ebe4; }
+  .tag   { font-family: Barlow, system-ui, sans-serif; font-size: 14px; font-weight: 600; fill: var(--verdigris); }
+  .card  { fill: #ffffff; stroke: var(--seam); stroke-width: 1.4; }
+  .crm   { fill: var(--verdigris-soft); stroke: var(--verdigris); stroke-width: 2; stroke-dasharray: 8 6; }
+  .ai    { fill: var(--patina); }
+  .alert { fill: var(--hivis-soft); stroke: var(--hivis); stroke-width: 1.6; }
+  .arrow { stroke: var(--verdigris); stroke-width: 2.5; fill: none; marker-end: url(#a); }
+</style>
+</head>
+<body>
+<svg id="diagram" xmlns="http://www.w3.org/2000/svg" width="1600" height="940" viewBox="0 0 1600 940" role="img"
+     aria-labelledby="title desc">
+  <title id="title">Northline lead response architecture</title>
+  <desc id="desc">A lead from the website form or a Facebook lead ad reaches an n8n webhook. The workflow claims a
+    row in the Lead log, checks for a repeat from the same email in the last 24 hours, and asks GPT-5.5 for a tier
+    and a reply using only the business facts. The CRM step creates or updates the HubSpot contact with a note, and
+    a deal for hot leads. The reply goes out through Gmail, Slack gets hot, invalid-contact and failure alerts, and
+    the Lead log row is completed. Failed calls retry three times, then raise a Slack alert; a crash triggers an
+    error workflow.</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#2e7563"/>
+    </marker>
+  </defs>
+
+  <text class="title" x="60" y="72">Northline lead response</text>
+  <text class="sub" x="60" y="104">One n8n run per lead: from form submit to a reply in the inbox, a CRM record, a Slack alert and a log row.</text>
+
+  <!-- Row 1 -->
+  <rect class="card" x="60" y="160" width="300" height="170" rx="10"/>
+  <text class="h" x="84" y="200">Lead comes in</text>
+  <text class="bi" x="84" y="234">Website form (Next.js)</text>
+  <text class="b" x="84" y="258">server route adds the webhook key</text>
+  <text class="bi" x="84" y="290">Facebook lead ad</text>
+  <text class="b" x="84" y="314">Graph API field_data payload</text>
+
+  <rect class="card" x="420" y="160" width="300" height="170" rx="10"/>
+  <text class="h" x="444" y="200">n8n webhook</text>
+  <text class="b" x="444" y="234">Answers at once; t0 is stamped</text>
+  <text class="b" x="444" y="258">Normalizes both payload shapes</text>
+  <text class="b" x="444" y="282">Checks the email format</text>
+  <text class="b" x="444" y="306">Works out office open or closed</text>
+
+  <rect class="card" x="780" y="160" width="300" height="170" rx="10"/>
+  <text class="h" x="804" y="200">Claim and dedupe</text>
+  <text class="b" x="804" y="234">Claims a Lead log row first</text>
+  <text class="b" x="804" y="258">Same email in 24 h: note only,</text>
+  <text class="b" x="804" y="282">no second reply</text>
+  <text class="b" x="804" y="306">Same lead id twice: dropped</text>
+
+  <rect class="ai" x="1140" y="160" width="400" height="170" rx="10"/>
+  <text class="hw" x="1164" y="200">AI tier and reply (GPT-5.5)</text>
+  <text class="bw" x="1164" y="234">Only the business facts as context</text>
+  <text class="bw" x="1164" y="258">Strict JSON: tier, reason, service, timeline,</text>
+  <text class="bw" x="1164" y="282">language, reply subject and text</text>
+  <text class="bw" x="1164" y="306">Lead text treated as data, not instructions</text>
+
+  <path class="arrow" d="M360 245 H414"/>
+  <path class="arrow" d="M720 245 H774"/>
+  <path class="arrow" d="M1080 245 H1134"/>
+  <path class="arrow" d="M1340 330 V424"/>
+
+  <!-- Row 2 (right to left) -->
+  <rect class="crm" x="1140" y="430" width="400" height="190" rx="10"/>
+  <text class="tag" x="1164" y="462">Swappable CRM step</text>
+  <text class="h" x="1164" y="494">HubSpot</text>
+  <text class="b" x="1164" y="526">Contact created or updated by email</text>
+  <text class="b" x="1164" y="550">Lead status set to hot, warm or cold</text>
+  <text class="b" x="1164" y="574">Note with the AI's reason</text>
+  <text class="b" x="1164" y="598">Hot: deal in the "New lead" stage</text>
+
+  <rect class="card" x="780" y="430" width="300" height="190" rx="10"/>
+  <text class="h" x="804" y="470">Reply email (Gmail)</text>
+  <text class="b" x="804" y="504">Sent in the lead's language</text>
+  <text class="b" x="804" y="528">Skipped for spam, repeats and</text>
+  <text class="b" x="804" y="552">invalid email addresses</text>
+  <text class="b" x="804" y="576">Still sent if the CRM step fails</text>
+
+  <rect class="alert" x="420" y="430" width="300" height="190" rx="10"/>
+  <text class="h" x="444" y="470">Slack</text>
+  <text class="bi" x="444" y="504">Hot lead: name, city, problem,</text>
+  <text class="bi" x="444" y="528">phone, CRM link</text>
+  <text class="bi" x="444" y="560">Invalid contact details</text>
+  <text class="bi" x="444" y="592">Lead failed: what went wrong</text>
+
+  <rect class="card" x="60" y="430" width="300" height="190" rx="10"/>
+  <text class="h" x="84" y="470">Lead log (Google Sheet)</text>
+  <text class="b" x="84" y="504">One row per lead: t0, t1,</text>
+  <text class="b" x="84" y="528">seconds to reply, tier, reason,</text>
+  <text class="b" x="84" y="552">replied, CRM id, status</text>
+  <text class="b" x="84" y="576">Slack log tab: every alert sent</text>
+
+  <path class="arrow" d="M1140 525 H1086"/>
+  <path class="arrow" d="M780 525 H726"/>
+  <path class="arrow" d="M420 525 H366"/>
+
+  <!-- Reliability band -->
+  <rect class="card" x="60" y="690" width="1480" height="190" rx="10"/>
+  <text class="h" x="84" y="732">Nothing fails silently</text>
+  <text class="bi" x="84" y="770">Every external call</text>
+  <text class="b" x="84" y="796">OpenAI, HubSpot, Gmail, Sheets and Slack</text>
+  <text class="b" x="84" y="820">retry 3 times, 2 s apart, then the lead is</text>
+  <text class="b" x="84" y="844">marked failed and Slack gets a "lead failed" alert.</text>
+
+  <text class="bi" x="580" y="770">Crashes</text>
+  <text class="b" x="580" y="796">If any step crashes after the webhook answered,</text>
+  <text class="b" x="580" y="820">an error workflow posts "lead workflow crashed"</text>
+  <text class="b" x="580" y="844">to Slack; the claimed row shows where it stopped.</text>
+
+  <text class="bi" x="1076" y="770">Safe by design</text>
+  <text class="b" x="1076" y="796">Sheet rows use Google's append API and plain</text>
+  <text class="b" x="1076" y="820">text values. Slack text is escaped. A reply with a</text>
+  <text class="b" x="1076" y="844">link other than the booking link is held.</text>
+</svg>
+</body>
+</html>
