@@ -10,7 +10,7 @@ const nextConfig: NextConfig = {
       },
     },
   },
-  // Keep the dev-mode badge out of the demo recording.
+  // Keep the dev-mode badge out of the video recording.
   devIndicators: false,
 };
 

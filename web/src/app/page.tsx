@@ -53,7 +53,7 @@ export default function Home() {
 
       <footer className="border-t border-seam">
         <p className="mx-auto max-w-6xl px-4 py-5 text-sm text-muted-foreground sm:px-8">
-          Northline Roofing &amp; Exteriors is a fictional company made for a portfolio demo of an automated lead reply.
+          A portfolio project: automated lead reply for Northline Roofing &amp; Exteriors.
         </p>
       </footer>
     </div>

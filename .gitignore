@@ -15,3 +15,6 @@ __pycache__/
 .DS_Store
 n8n/.deploy-state.json
 eval/.runs/
+
+# internal build spec (kept locally, not published)
+BUILD_SPEC*.md

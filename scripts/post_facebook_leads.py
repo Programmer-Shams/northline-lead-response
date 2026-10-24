@@ -1,6 +1,6 @@
 """Post Facebook Lead Ads-style leads (Graph API field_data shape) to the n8n lead webhook.
 
-Stands in for the Facebook Lead Ads trigger in the demo: same payload shape, source=facebook.
+Stands in for the Facebook Lead Ads trigger in this project: same payload shape, source=facebook.
 Takes the facebook rows from data/test-leads.csv; each run gets fresh plus-addresses.
 
 Usage:

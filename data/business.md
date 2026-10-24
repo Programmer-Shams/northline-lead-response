@@ -1,6 +1,6 @@
 # Northline Roofing & Exteriors — business facts for the lead agent
 
-Northline Roofing & Exteriors is a fictional company created for a portfolio demo. The agent may only use the facts on this page. Anything not here is unknown.
+The agent may only use the facts on this page. Anything not here is unknown.
 
 ## Services
 - Roof repair and leak repair (residential and light commercial, including flat roofs)

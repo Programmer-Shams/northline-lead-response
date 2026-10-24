@@ -1,6 +1,6 @@
 # Case study: every new lead answered and in the CRM within seconds
 
-**Project:** Northline lead response, a portfolio demo for a fictional roofing company in Columbus, Ohio
+**Project:** Northline lead response, a portfolio project for a roofing company in Columbus, Ohio
 **Built with:** n8n, GPT-5.5, HubSpot (free CRM), Gmail, Slack, Google Sheets, Next.js
 
 ## The problem
@@ -13,7 +13,7 @@ Service businesses lose leads to slow replies. A homeowner with water coming thr
 - alert the team about hot leads;
 - never fail silently.
 
-I built that for a fictional roofer, Northline Roofing & Exteriors, then measured it on 20 test leads written before the build.
+I built that for a roofer, Northline Roofing & Exteriors, then measured it on 20 test leads written before the build.
 
 ## What I built
 

@@ -1,6 +1,6 @@
-"""Deploy the Northline lead workflow to local n8n (Demo 1's instance) through its public API.
+"""Deploy the Northline lead workflow to local n8n through its public API.
 
-1. Creates the n8n credentials from .env (all named "Northline ..."; Demo 1's are never touched).
+1. Creates the n8n credentials from .env (all named "Northline ..."; other projects' are never touched).
    Secrets go straight from .env into n8n; they are never printed or written to the repo.
    N8N_WEBHOOK_SECRET is generated on first run. The two Google credentials still need one
    "Sign in with Google" click each in the n8n UI.

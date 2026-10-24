@@ -22,5 +22,5 @@ n8n, HubSpot, OpenAI API, Workflow Automation, Lead Generation
 
 **Content**, in this order:
 
-1. Video: `northline-lead-response-demo.mp4` (1:30, recorded in Chrome, no audio).
+1. Video: `northline-lead-response.mp4` (1:30, recorded in Chrome, no audio).
 2. Image: `docs/architecture.png`.

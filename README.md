@@ -2,7 +2,7 @@
 
 Every new lead from a website form or a Facebook lead ad gets a personal email reply within seconds, is scored hot, warm or cold by AI, and lands in HubSpot with a note explaining the score. Hot leads alert the sales team in Slack, spam and repeat enquiries are filtered, and failures retry and raise an alert. Every lead is logged to a Google Sheet. ([Case study](docs/case-study.md))
 
-Northline Roofing & Exteriors (Columbus, Ohio) is a fictional company. Its facts, prices and rules are in [`data/business.md`](data/business.md); the 20 test leads are in [`data/test-leads.csv`](data/test-leads.csv).
+Northline Roofing & Exteriors (Columbus, Ohio) is the company in this portfolio project. Its facts, prices and rules are in [`data/business.md`](data/business.md); the 20 test leads are in [`data/test-leads.csv`](data/test-leads.csv).
 
 ## How it works
 
